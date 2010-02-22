@@ -61,7 +61,7 @@ function decrypt(src) {
 	delete init_b;
 	delete init_c;
 	delete init_d;
-	return psw.toString();
+	//return psw.toString();
 	
 	// calculate
 	var chars = [];
@@ -77,7 +77,7 @@ function decrypt(src) {
 		chars_a = (chars_a + 1) % 256;
 		chars_b = (chars_b + sbox[chars_a]) % 256;
 		chars_e = sbox[chars_a];
-		sbox[chars_a] = this.sbox[chars_b];
+		sbox[chars_a] = sbox[chars_b];
 		sbox[chars_b] = chars_e;
 		chars_h = (sbox[chars_a] + sbox[chars_b]) % 256;
 		chars_d = sbox[chars_h];
