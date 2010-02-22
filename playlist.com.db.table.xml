@@ -15,7 +15,7 @@
 			</inputs>
 			<execute><![CDATA[
 
-y.include();
+y.include("http://github.com/oxchronxo/YQL/raw/master/playlist.com.db.table.js");
 
 var playlist = y.rest("http://pl.playlist.com/pl.php?playlist=" + playlist_id).get().response;
 
