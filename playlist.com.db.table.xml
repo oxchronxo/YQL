@@ -18,16 +18,19 @@
 y.include("http://github.com/oxchronxo/YQL/raw/master/playlist.com.db.table.js");
 
 var playlist = y.rest("http://pl.playlist.com/pl.php?playlist=" + playlist_id).get().response;
+var tracklist = playlist.trackList;
+var track;
 
-for (var i = 0; i < playlist.trackList.track.length(); i++) {
+for (var i = 0; i < tracklist.track.length(); i++) {
+	track = tracklist.track[i];
 	
-	playlist.trackList.track[i].location = !playlist.trackList.track[i].location.split("").length ? playlist.trackList.track[i].originallocation : decrypt(playlist.trackList.track[i].location);
+	track.location = !track.location.split("").length ? track.originallocation : decrypt(track.location);
 	
-	delete playlist.trackList.track[i].trackid;
-	delete playlist.trackList.track[i].bluewireid;
-	delete playlist.trackList.track[i].duration;
-	delete playlist.trackList.track[i].annotation;
-	delete playlist.trackList.track[i].originallocation;
+	delete track.trackid;
+	delete track.bluewireid;
+	delete track.duration;
+	delete track.annotation;
+	delete track.originallocation;
 	
 }
 
