@@ -26,6 +26,7 @@ function decrypt(src) {
 		plaintxt.push(parseInt(src.substr(plaintxtIndex, 2), 16));
 		plaintxtIndex += 2;
 	}
+	return plaintxt.toString();
 	
 	// strToChars
 	var key = "sdf883jsdf22";
@@ -91,8 +92,7 @@ function decrypt(src) {
 		++strIndex;
 	}
 	
-	return plaintxt.toString();
-	//return str;
+	return str;
 }
 
 //y.include();
