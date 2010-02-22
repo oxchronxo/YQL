@@ -26,7 +26,7 @@ function decrypt(src) {
 		plaintxt.push(parseInt(src.substr(plaintxtIndex, 2), 16));
 		plaintxtIndex += 2;
 	}
-	return plaintxt.toString();
+	return src;
 	
 	// strToChars
 	var key = "sdf883jsdf22";
