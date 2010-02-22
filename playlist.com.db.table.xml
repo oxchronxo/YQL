@@ -26,7 +26,7 @@ function decrypt(src) {
 		plaintxt.push(parseInt(src.substr(plaintxtIndex, 2), 16));
 		plaintxtIndex += 2;
 	}
-	return plaintxt.toString();
+	//return plaintxt.toString();
 	
 	// strToChars
 	var key = "sdf883jsdf22";
@@ -36,6 +36,7 @@ function decrypt(src) {
 		psw.push(key.charCodeAt(pswIndex));
 		++pswIndex;
 	}
+	return psw.toString();
 	
 	// init - stage 1
 	init_a = 0;
