@@ -1,22 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <table xmlns="http://query.yahooapis.com/v1/schema/table.xsd">
-  <meta>
-	<author>Eric Fehrenbacher</author>
-    <sampleQuery>select * from playlists where playlist_id=@playlist_id</sampleQuery>
-    <documentationURL></documentationURL>
-  </meta>
-  <bindings>
-    <select itemPath="" produces="XML">
-      <urls>
-        <url>http://pl.playlist.com/pl.php?</url>
-      </urls>
-      <inputs>
-        <key id="playlist_id" type="xs:string" paramType="variable" required="true"/>
-      </inputs>
-      <execute><![CDATA[
-//y.include();
-response.object = y.rest("http://pl.playlist.com/pl.php?playlist=" + playlist_id).get().response;
-      ]]></execute>
-    </select>
-  </bindings>
+	<meta>
+		<author>Eric Fehrenbacher</author>
+		<sampleQuery>select * from playlists where playlist_id=@playlist_id</sampleQuery>
+		<documentationURL></documentationURL>
+	</meta>
+	<bindings>
+		<select itemPath="" produces="XML">
+			<urls>
+				<url>http://pl.playlist.com/pl.php</url>
+			</urls>
+			<inputs>
+				<key id="playlist_id" type="xs:string" paramType="variable" required="true"/>
+			</inputs>
+			<execute><![CDATA[
+
+var response = y.rest("http://pl.playlist.com/pl.php?playlist=" + playlist_id).get().response;
+
+var results = "nothing";
+
+if (response.query.response.playlist.trackList) {   
+	results = response.query.response.playlist.trackList;
+}
+
+response.object = results;
+
+			]]></execute>
+		</select>
+	</bindings>
 </table>
