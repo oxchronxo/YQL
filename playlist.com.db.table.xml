@@ -16,8 +16,8 @@
 			<execute><![CDATA[
 
 function decrypt(src) {
-	var sbox = new Array(255);
-	var mykey = new Array(255);
+	var sbox = [];
+	var mykey = [];
 	
 	// hexToChars
 	var plaintxt = [];
