@@ -36,7 +36,7 @@ function decrypt(src) {
 		psw.push(key.charCodeAt(pswIndex));
 		++pswIndex;
 	}
-	return psw.toString();
+	//return psw.toString();
 	
 	// init - stage 1
 	init_a = 0;
@@ -61,6 +61,7 @@ function decrypt(src) {
 	delete init_b;
 	delete init_c;
 	delete init_d;
+	return psw.toString();
 	
 	// calculate
 	var chars = [];
