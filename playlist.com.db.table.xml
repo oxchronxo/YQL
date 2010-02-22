@@ -15,43 +15,38 @@
 			</inputs>
 			<execute><![CDATA[
 
-hexToChars = function(hex) {
-	var a = new Array();
-	var b = (hex.substr(0, 2) == '0x') ? 2 : 0;
-	while (b < hex.length) {
-		a.push(parseInt(hex.substr(b, 2), 16));
+function decrypt(src) {
+	var sbox = new Array(255);
+	var mykey = new Array(255);
+	
+	var key = "sdf883jsdf22";
+	
+	var a, b, c, d, e, f, g;
+	
+	// hexToChars
+	a = [];
+	b = (src.substr(0, 2) == '0x') ? 2 : 0;
+	while (b < src.length) {
+		a.push(parseInt(src.substr(b, 2), 16));
 		b += 2;
 	}
-	return a;
-}
-
-charsToStr = function (chars) {
-	var a = '';
-	var b = 0;
-	while (b < chars.length) {
-		a += String.fromCharCode(chars[b]);
+	var plaintxt = a; // array
+	
+	// strToChars
+	a = [];
+	b = 0;
+	while (b < key.length) {
+		a.push(key.charCodeAt(b));
 		++b;
 	}
-	return a;
-}
-
-strToChars = function (str) {
-	var a = new Array();
-	var b = 0;
-	while (b < str.length) {
-		a.push(str.charCodeAt(b));
-		++b;
-	}
-	return a;
-}
-
-initialize = function(pwd) {
-	var a = 0;
-	var b;
-	var c = pwd.length;
-	var d = 0;
+	var psw = a; //
+	
+	// initialize
+	a = 0;
+	c = psw.length;
+	d = 0;
 	while (d <= 255) {
-		mykey[d] = pwd[d % c];
+		mykey[d] = psw[d % c];
 		sbox[d] = d;
 		++d;
 	}
@@ -63,17 +58,12 @@ initialize = function(pwd) {
 		sbox[a] = b;
 		++d;
 	}
-}
-
-calculate = function (plaintxt, psw) {
-	initialize(psw);
-	var a = 0;
-	var b = 0;
-	var c = new Array();
-	var d;
-	var e;
-	var f;
-	var g = 0;
+	
+	// calculate
+	a = 0;
+	b = 0;
+	c = [];
+	g = 0;
 	while (g < plaintxt.length) {
 		a = (a + 1) % 256;
 		b = (b + sbox[a]) % 256;
@@ -86,20 +76,19 @@ calculate = function (plaintxt, psw) {
 		c.push(f);
 		++g;
 	}
-	return c;
+	var chars = c; //
+	
+	// charsToStr
+	a = "";
+	b = 0;
+	while (b < chars.length) {
+		a += String.fromCharCode(chars[b]);
+		++b;
+	}
+	var str = a; //
+	
+	return str;
 }
-
-decrypt = function(src, key) {
-	sbox = new Array(255);
-	mykey = new Array(255);
-	var plaintxt = hexToChars(src); // returns array
-	var psw = strToChars(key);
-	var chars = calculate(plaintxt, psw);
-	var str = charsToStr(chars);
-	return src;
-}
-
-hashKey = "sdf883jsdf22";
 
 //y.include();
 
@@ -108,7 +97,7 @@ hashKey = "sdf883jsdf22";
 playlist = y.rest("http://pl.playlist.com/pl.php?playlist=" + playlist_id).get().response;
 
 for (var i = 0; i < playlist.trackList.track.length(); i++) {
-	playlist.trackList.track[i].location = decrypt(playlist.trackList.track[i].location, hashKey);
+	playlist.trackList.track[i].location = decrypt(playlist.trackList.track[i].location);
 }
 
 response.object = playlist;
