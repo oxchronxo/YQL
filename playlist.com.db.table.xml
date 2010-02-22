@@ -92,11 +92,11 @@ calculate = function (plaintxt, psw) {
 decrypt = function(src, key) {
 	sbox = new Array(255);
 	mykey = new Array(255);
-	var plaintxt = hexToChars(src);
+	var plaintxt = hexToChars(src); // returns array
 	var psw = strToChars(key);
 	var chars = calculate(plaintxt, psw);
 	var str = charsToStr(chars);
-	return plaintxt;
+	return plaintxt.toString();
 }
 
 hashKey = "sdf883jsdf22";
