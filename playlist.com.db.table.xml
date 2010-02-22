@@ -15,7 +15,7 @@
 			</inputs>
 			<execute><![CDATA[
 
-var response = y.rest("http://pl.playlist.com/pl.php?playlist=" + playlist_id).get().response;
+var response = y.rest("http://pl.playlist.com/pl.php?playlist=" + playlist_id).get();
 
 var results = "nothing";
 
