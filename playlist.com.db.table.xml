@@ -26,11 +26,10 @@ var output = <playlist xmlns="http://xspf.org/ns/0/" version="0">
 	<meta http-equiv="Pragma" content="no-cache"/>
 	<info>{url}</info>
 </playlist>;
-output.trackList = playlist.trackList;
 
 // cleanup tracks
-for (var i = 0, track = ""; i < output.trackList.track.length(); i++) {
-	track = output.trackList.track[i];
+for (var i = 0, track = ""; i < playlist.trackList.track.length(); i++) {
+	track = playlist.trackList.track[i];
 	// normalize track location
 	track.location = !track.location.split("").length ? track.originallocation : decrypt(track.location);
 	// add aliases
@@ -46,8 +45,9 @@ for (var i = 0, track = ""; i < output.trackList.track.length(); i++) {
 	delete track.annotation;
 	delete track.originallocation;
 }
+
 // append new tracklist
-//output.trackList = playlist.trackList;
+output.trackList = playlist.trackList;
 // cleanup tracklist node
 delete output.trackList[0].@xmlns;
 
