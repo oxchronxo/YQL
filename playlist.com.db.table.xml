@@ -22,9 +22,9 @@ var playlist = y.rest(url).get().response;
 
 // create standardized format
 var output = <playlist xmlns="http://xspf.org/ns/0/" version="0">
-	<meta http-equiv="Cache-Control" content="no-cache"/>
-	<meta http-equiv="Pragma" content="no-cache"/>
-	<info>{url}</info>
+	//<meta http-equiv="Cache-Control" content="no-cache"/>
+	//<meta http-equiv="Pragma" content="no-cache"/>
+	//<info>{url}</info>
 	<title>{playlist.title.text()}</title>
 </playlist>;
 
