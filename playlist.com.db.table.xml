@@ -15,6 +15,26 @@
 			</inputs>
 			<execute><![CDATA[
 
+initialize = function(pwd) {
+	var a = 0;
+	var b;
+	var c = pwd.length;
+	var d = 0;
+	while (d <= 255) {
+		mykey[d] = pwd[d % c];
+		sbox[d] = d;
+		++d;
+	}
+	d = 0;
+	while (d <= 255) {
+		a = (a + sbox[d] + mykey[d]) % 256;
+		b = sbox[d];
+		sbox[d] = sbox[a];
+		sbox[a] = b;
+		++d;
+	}
+}
+
 hexToChars = function(hex) {
 	var a = new Array();
 	var b = (hex.substr(0, 2) == '0x') ? 2 : 0;
