@@ -46,7 +46,7 @@ function decrypt(src) {
 	}
 	// init - stage 2
 	init_c = 0;
-	init_d;
+	init_d = 0;
 	while (init_c <= 255) {
 		init_a = (init_a + sbox[init_c] + mykey[init_c]) % 256;
 		init_d = sbox[init_c];
