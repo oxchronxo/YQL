@@ -45,7 +45,7 @@ for (var i = 0, track = ""; i < playlist.trackList.track.length(); i++) {
 	delete track.bluewireid;
 	delete track.annotation;
 	delete track.originallocation;
-	output.trackList += track;
+	output.trackList.track += track;
 }
 
 // append new tracklist
