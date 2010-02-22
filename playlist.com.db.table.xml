@@ -31,7 +31,7 @@ for (var i = 0, track = ""; i < tracklist.track.length(); i++) {
 	track = tracklist.track[i];
 	track.location = !track.location.split("").length ? track.originallocation : decrypt(track.location);
 	
-	track.appendChild("img", (track.image || ""));
+	track["img"] = track.image || "";
 	track.title = track.tracktitle;
 	
 	delete track.trackid;
