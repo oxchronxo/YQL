@@ -103,12 +103,12 @@ function decrypt(src) {
 playlist = y.rest("http://pl.playlist.com/pl.php?playlist=" + playlist_id).get().response;
 
 for (var i = 0; i < playlist.trackList.track.length(); i++) {
-	playlist.trackList.track[i].location = !playlist.trackList.track[i].location.split("").length ? playlist.trackList.track[i].originalLocation : decrypt(playlist.trackList.track[i].location);
+	playlist.trackList.track[i].location = !playlist.trackList.track[i].location.split("").length ? playlist.trackList.track[i].originallocation : decrypt(playlist.trackList.track[i].location);
 	delete playlist.trackList.track[i].trackid;
 	delete playlist.trackList.track[i].bluewireid;
 	delete playlist.trackList.track[i].duration;
-	delete playlist.trackList.track[i].annotaion;
-	delete playlist.trackList.track[i].originalLocation;
+	delete playlist.trackList.track[i].annotation;
+	delete playlist.trackList.track[i].originallocation;
 }
 
 response.object = playlist;
