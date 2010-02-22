@@ -109,8 +109,7 @@ playlist = y.rest("http://pl.playlist.com/pl.php?playlist=" + playlist_id).get()
 for (var i = 0; i < playlist.trackList.track.length(); i++) {
 	//playlist.trackList.track[i].location = playlist.trackList.track[i].originalLocation;
 	decrypted = decrypt(playlist.trackList.track[i].location, hashKey)
-	playlist.trackList.track[i].newlocation = <newlocation>{decrypted}</newlocation>;
-	//playlist.trackList.track[i].location = "nothing";
+	playlist.trackList.track[i].newlocation = <newlocation>decrypted</newlocation>;
 }
 
 response.object = playlist;
