@@ -25,7 +25,6 @@ var output = <playlist xmlns="http://xspf.org/ns/0/" version="0">
 	<meta http-equiv="Cache-Control" content="no-cache"/>
 	<meta http-equiv="Pragma" content="no-cache"/>
 	<info>{url}</info>
-	<trackList></trackList>
 </playlist>;
 
 // cleanup tracks
