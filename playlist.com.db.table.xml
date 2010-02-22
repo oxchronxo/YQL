@@ -31,7 +31,7 @@ var output = <playlist xmlns="http://xspf.org/ns/0/" version="0">
 */
 var output = <playlist xmlns="http://xspf.org/ns/0/" version="0">
 	<info>{url}</info>
-	<title>{playlist.title[0]}</title>
+	<title>{playlist.title.text()}</title>
 </playlist>;
 
 // cleanup tracks
