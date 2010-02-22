@@ -14,17 +14,8 @@
 				<key id="playlist_id" type="xs:string" paramType="variable" required="true"/>
 			</inputs>
 			<execute><![CDATA[
-
-var response = y.rest("http://pl.playlist.com/pl.php?playlist=" + playlist_id).get();
-
-var results = "nothing";
-
-if (response.query.response.playlist.trackList) {   
-	results = response.query.response.playlist.trackList;
-}
-
-response.object = results;
-
+//response.query.response.playlist.trackList
+response.object = y.rest("http://pl.playlist.com/pl.php?playlist=" + playlist_id).get().response;
 			]]></execute>
 		</select>
 	</bindings>
