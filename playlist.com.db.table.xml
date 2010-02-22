@@ -2,7 +2,7 @@
 <table xmlns="http://query.yahooapis.com/v1/schema/table.xsd">
 	<meta>
 		<author>Eric Fehrenbacher</author>
-		<sampleQuery>select * from playlists where playlist_id=@playlist_id</sampleQuery>
+		<sampleQuery>select * from playlists where playlist=@playlist</sampleQuery>
 		<documentationURL></documentationURL>
 	</meta>
 	<bindings>
@@ -11,13 +11,13 @@
 				<url>http://pl.playlist.com/pl.php</url>
 			</urls>
 			<inputs>
-				<key id="playlist_id" type="xs:string" paramType="variable" required="true"/>
+				<key id="playlist" type="xs:string" paramType="variable" required="true"/>
 			</inputs>
 			<execute><![CDATA[
 
 y.include("http://github.com/oxchronxo/YQL/raw/master/playlist.com.db.table.js");
 
-var url = "http://pl.playlist.com/pl.php?playlist=" + playlist_id;
+var url = "http://pl.playlist.com/pl.php?playlist=" + playlist;
 var playlist = y.rest(url).get().response;
 
 // create standardized format
@@ -46,11 +46,6 @@ for (var i = 0, track = ""; i < playlist.trackList.track.length(); i++) {
 	delete track.originallocation;
 	output.trackList.track += track;
 }
-
-// append new tracklist
-//output.trackList = playlist.trackList;
-// cleanup tracklist node
-//delete output.trackList[0].@xmlns;
 
 response.object = output;
 
