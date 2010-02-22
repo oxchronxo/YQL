@@ -31,8 +31,8 @@ for (var i = 0, track = ""; i < tracklist.track.length(); i++) {
 	track = tracklist.track[i];
 	track.location = !track.location.split("").length ? track.originallocation : decrypt(track.location);
 	
-	track["img"] = String(track.image) || "";
-	track.title = track.tracktitle;
+	track.img = String(track.image) || "";
+	track.title = String(track.tracktitle) || "";
 	
 	delete track.trackid;
 	delete track.bluewireid;
