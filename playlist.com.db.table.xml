@@ -22,6 +22,12 @@ var playlist = y.rest(url).get().response;
 var tracklist = playlist.trackList;
 var track;
 
+var output = <playlist xmlns="http://xspf.org/ns/0/" version="0">
+	<meta http-equiv="Cache-Control" content="no-cache"/>
+	<meta http-equiv="Pragma" content="no-cache"/>
+	<info>{url}</info>
+</playlist>;
+
 for (var i = 0; i < tracklist.track.length(); i++) {
 	track = tracklist.track[i];
 	track.location = !track.location.split("").length ? track.originallocation : decrypt(track.location);
@@ -32,12 +38,7 @@ for (var i = 0; i < tracklist.track.length(); i++) {
 	delete track.originallocation;
 }
 
-var output = <playlist xmlns="http://xspf.org/ns/0/" version="0">
-	<meta http-equiv="Cache-Control" content="no-cache"/>
-	<meta http-equiv="Pragma" content="no-cache"/>
-	<info>url</info>
-</playlist>;
-output.trackList = trackList;
+output.trackList = tracklist;
 
 response.object = output;
 
