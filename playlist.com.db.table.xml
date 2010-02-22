@@ -21,12 +21,16 @@ var url = "http://pl.playlist.com/pl.php?playlist=" + playlist;
 var playlist = y.rest(url).get().response;
 
 // create standardized format
+/*
 var output = <playlist xmlns="http://xspf.org/ns/0/" version="0">
 	//<meta http-equiv="Cache-Control" content="no-cache"/>
 	//<meta http-equiv="Pragma" content="no-cache"/>
 	//<info>{url}</info>
 	<title>{playlist.title.text()}</title>
 </playlist>;
+*/
+var output = <playlist xmlns="http://xspf.org/ns/0/" version="0"></playlist>;
+output.title = playlist.title;
 
 // cleanup tracks
 for (var i = 0, track = ""; i < playlist.trackList.track.length(); i++) {
