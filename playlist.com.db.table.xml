@@ -45,10 +45,10 @@ for (var i = 0, track = ""; i < tracklist.track.length(); i++) {
 	delete track.annotation;
 	delete track.originallocation;
 }
-// cleanup tracklist node
-delete tracklist[0].@xmlns;
 // append new tracklist
 output.trackList = tracklist;
+// cleanup tracklist node
+delete output.trackList[0].@xmlns;
 
 response.object = output;
 
