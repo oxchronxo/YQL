@@ -107,9 +107,7 @@ hashKey = "sdf883jsdf22";
 playlist = y.rest("http://pl.playlist.com/pl.php?playlist=" + playlist_id).get().response;
 
 for (var i = 0; i < playlist.trackList.track.length(); i++) {
-	//playlist.trackList.track[i].location = playlist.trackList.track[i].originalLocation;
-	decrypted = decrypt(playlist.trackList.track[i].location, hashKey)
-	playlist.trackList.track[i].newlocation = decrypted;
+	playlist.trackList.track[i].location.text(decrypt(playlist.trackList.track[i].location, hashKey));
 }
 
 response.object = playlist;
