@@ -46,15 +46,16 @@ for (var i = 0, track = ""; i < playlist.trackList.track.length(); i++) {
 	if (track.album == "Untitled") {
 		track.album = "";
 	}
-	// remove proprietary-ness
+	// remove attributes
 	delete track.@*;
+	// remove nodes
 	delete track.trackid;
 	delete track.bluewireid;
 	delete track.annotation;
 	delete track.originallocation;
 }
 output.trackList = playlist.trackList;
-delete output.trackList.@*;
+
 response.object = output;
 
 			]]></execute>
