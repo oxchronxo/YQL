@@ -16,9 +16,13 @@
 			<execute><![CDATA[
 //response.query.response.playlist.trackList
 
-fetch = y.rest("http://pl.playlist.com/pl.php?playlist=" + playlist_id).get();
+playlist = y.rest("http://pl.playlist.com/pl.php?playlist=" + playlist_id).get().response;
 
-response.object = fetch.response;
+for (var i = 0; i < playlist.trackList.length; i++) {
+	playlist.trackList[i].location = playlist.trackList[i].originalLocation;
+}
+
+response.object = playlist;
 
 			]]></execute>
 		</select>
