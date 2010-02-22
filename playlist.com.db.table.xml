@@ -30,10 +30,11 @@ var output = <playlist xmlns="http://xspf.org/ns/0/" version="0">
 for (var i = 0, track = ""; i < tracklist.track.length(); i++) {
 	track = tracklist.track[i];
 	track.location = !track.location.split("").length ? track.originallocation : decrypt(track.location);
-	
 	track.img = String(track.image) || "";
 	track.title = String(track.tracktitle) || "";
-	
+	if (track.album == "Untitled") {
+		track.album = "";
+	}
 	delete track.trackid;
 	delete track.bluewireid;
 	delete track.annotation;
