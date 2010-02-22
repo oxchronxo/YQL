@@ -52,7 +52,7 @@ for (var i = 0, track = ""; i < playlist.trackList.track.length(); i++) {
 	delete track.bluewireid;
 	delete track.annotation;
 	delete track.originallocation;
-	output.trackList.track += track;
+	output.trackList += track;
 }
 
 response.object = output;
