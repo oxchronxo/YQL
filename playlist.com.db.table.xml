@@ -15,7 +15,11 @@
 			</inputs>
 			<execute><![CDATA[
 //response.query.response.playlist.trackList
-response.object = y.rest("http://pl.playlist.com/pl.php?playlist=" + playlist_id).get().response;
+
+fetch = y.rest("http://pl.playlist.com/pl.php?playlist=" + playlist_id).get();
+
+response.object = fetch.response;
+
 			]]></execute>
 		</select>
 	</bindings>
