@@ -18,7 +18,7 @@
 
 fetch = y.rest("http://pl.playlist.com/pl.php?playlist=" + playlist_id).get();
 
-response.object = fetch.response.playlist;
+response.object = fetch.response;
 
 			]]></execute>
 		</select>
