@@ -3,7 +3,6 @@
 	<meta>
 		<author>Eric Fehrenbacher</author>
 		<sampleQuery>select * from playlists where playlist=@playlist</sampleQuery>
-		<documentationURL></documentationURL>
 	</meta>
 	<bindings>
 		<select itemPath="" produces="XML">
