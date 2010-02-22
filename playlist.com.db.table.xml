@@ -18,25 +18,20 @@
 y.include("http://github.com/oxchronxo/YQL/raw/master/playlist.com.db.table.js");
 
 var url = "http://pl.playlist.com/pl.php?playlist=" + playlist;
-var playlist = y.rest(url).get().response;
+var xspf = y.rest(url).get().response;
 
 // create standardized format
-/*
+//<meta http-equiv="Cache-Control" content="no-cache"/>
+//<meta http-equiv="Pragma" content="no-cache"/>
 var output = <playlist xmlns="http://xspf.org/ns/0/" version="0">
-	//<meta http-equiv="Cache-Control" content="no-cache"/>
-	//<meta http-equiv="Pragma" content="no-cache"/>
+	<id>{playlist}</id>
 	<info>{url}</info>
-	<title>{playlist.title[0]}</title>
-</playlist>;
-*/
-var output = <playlist xmlns="http://xspf.org/ns/0/" version="0">
-	<info>{url}</info>
-	<title>{playlist.title.text()}</title>
+	<title>{xspf.title.text()}</title>
 </playlist>;
 
 // cleanup tracks
-for (var i = 0, track = ""; i < playlist.trackList.track.length(); i++) {
-	track = playlist.trackList.track[i];
+for (var i = 0, track = ""; i < xspf.trackList.track.length(); i++) {
+	track = xspf.trackList.track[i];
 	// normalize track location
 	track.location = !track.location.split("").length ? track.originallocation : decrypt(track.location);
 	// add aliases
@@ -54,7 +49,7 @@ for (var i = 0, track = ""; i < playlist.trackList.track.length(); i++) {
 	delete track.annotation;
 	delete track.originallocation;
 }
-output.trackList = playlist.trackList;
+output.trackList = xspf.trackList;
 
 response.object = output;
 
