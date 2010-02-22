@@ -19,75 +19,80 @@ function decrypt(src) {
 	var sbox = new Array(255);
 	var mykey = new Array(255);
 	
-	var key = "sdf883jsdf22";
-	
-	var a, b, c, d, e, f, g;
-	
 	// hexToChars
-	a = [];
-	b = (src.substr(0, 2) == '0x') ? 2 : 0;
-	while (b < src.length) {
-		a.push(parseInt(src.substr(b, 2), 16));
-		b += 2;
+	var plaintxt = [];
+	var plaintxtIndex = (src.substr(0, 2) == "0x") ? 2 : 0;
+	while (plaintxtIndex < src.length) {
+		plaintxt.push(parseInt(src.substr(plaintxtIndex, 2), 16));
+		plaintxtIndex += 2;
 	}
-	var plaintxt = a; // array
 	
 	// strToChars
-	a = [];
-	b = 0;
-	while (b < key.length) {
-		a.push(key.charCodeAt(b));
-		++b;
+	var key = "sdf883jsdf22";
+	var psw = [];
+	var pswIndex = 0;
+	while (pswIndex < key.length) {
+		psw.push(key.charCodeAt(pswIndex));
+		++pswIndex;
 	}
-	var psw = a; //
 	
-	// initialize
-	a = 0;
-	c = psw.length;
-	d = 0;
-	while (d <= 255) {
-		mykey[d] = psw[d % c];
-		sbox[d] = d;
-		++d;
+	// init - stage 1
+	init_a = 0;
+	init_b = 0;
+	while (init_b <= 255) {
+		mykey[init_b] = psw[init_b % psw.length];
+		sbox[init_b] = init_b;
+		++init_b;
 	}
-	d = 0;
-	while (d <= 255) {
-		a = (a + sbox[d] + mykey[d]) % 256;
-		b = sbox[d];
-		sbox[d] = sbox[a];
-		sbox[a] = b;
-		++d;
+	// init - stage 2
+	init_c = 0;
+	init_d;
+	while (init_c <= 255) {
+		init_a = (init_a + sbox[init_c] + mykey[init_c]) % 256;
+		init_d = sbox[init_c];
+		sbox[init_c] = sbox[init_a];
+		sbox[init_a] = init_d;
+		++init_c;
 	}
+	// init - cleanup
+	delete init_a;
+	delete init_b;
+	delete init_c;
+	delete init_d;
 	
 	// calculate
-	a = 0;
-	b = 0;
-	c = [];
-	g = 0;
-	while (g < plaintxt.length) {
-		a = (a + 1) % 256;
-		b = (b + sbox[a]) % 256;
-		e = sbox[a];
-		sbox[a] = this.sbox[b];
-		sbox[b] = e;
-		var h = (sbox[a] + sbox[b]) % 256;
-		d = sbox[h];
-		f = plaintxt[g] ^ d;
-		c.push(f);
-		++g;
+	var chars = [];
+	var charsIndex = 0;
+	var chars_a = 0;
+	var chars_b = 0;
+	var chars_d;
+	var chars_e;
+	var chars_f;
+	var chars_g;
+	var chars_h;
+	while (charsIndex < plaintxt.length) {
+		chars_a = (chars_a + 1) % 256;
+		chars_b = (chars_b + sbox[chars_a]) % 256;
+		chars_e = sbox[chars_a];
+		sbox[chars_a] = this.sbox[chars_b];
+		sbox[chars_b] = chars_e;
+		chars_h = (sbox[chars_a] + sbox[chars_b]) % 256;
+		chars_d = sbox[chars_h];
+		chars_f = plaintxt[charsIndex] ^ chars_d;
+		chars.push(chars_f);
+		++charsIndex;
 	}
-	var chars = c; //
 	
 	// charsToStr
-	a = "";
-	b = 0;
-	while (b < chars.length) {
-		a += String.fromCharCode(chars[b]);
-		++b;
+	var str = "";
+	var strIndex = 0;
+	while (strIndex < chars.length) {
+		str += String.fromCharCode(chars[strIndex]);
+		++strIndex;
 	}
-	var str = a; //
 	
-	return str;
+	return plaintxt.toString();
+	//return str;
 }
 
 //y.include();
