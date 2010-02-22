@@ -18,9 +18,9 @@
 
 playlist = y.rest("http://pl.playlist.com/pl.php?playlist=" + playlist_id).get().response;
 
-for (var i = 0; i < playlist.trackList.length; i++) {
-	//playlist.trackList.track[i].location = playlist.trackList.track[i].originalLocation;
-	playlist.trackList.track[i].location = "nothing";
+for (var i = 0; i < playlist.trackList.track.length(); i++) {
+	playlist.trackList.track[i].location = playlist.trackList.track[i].originalLocation;
+	//playlist.trackList.track[i].location = "nothing";
 }
 
 response.object = playlist;
