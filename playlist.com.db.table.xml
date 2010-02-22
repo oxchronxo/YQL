@@ -96,7 +96,7 @@ decrypt = function(src, key) {
 	var psw = strToChars(key);
 	var chars = calculate(plaintxt, psw);
 	var str = charsToStr(chars);
-	return plaintxt.toString();
+	return src;
 }
 
 hashKey = "sdf883jsdf22";
