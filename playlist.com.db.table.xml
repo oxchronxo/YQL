@@ -16,89 +16,88 @@
 			<execute><![CDATA[
 
 function decrypt(src) {
-	var sbox = [];
-	var mykey = [];
-	
-	// hexToChars
-	var plaintxt = [];
-	var plaintxtIndex = (src.substr(0, 2) == "0x") ? 2 : 0;
-	while (plaintxtIndex < src.split("").length) {
-		plaintxt.push(parseInt(src.substr(plaintxtIndex, 2), 16));
-		plaintxtIndex += 2;
-	}
-	//return plaintxt.toString();
-	
-	// strToChars
+
 	var key = "sdf883jsdf22";
+	var str = "";
+	var sbx = [];
+	var mky = [];
+	var ptx = [];
 	var psw = [];
-	var pswIndex = 0;
-	while (pswIndex < key.split("").length) {
-		psw.push(key.charCodeAt(pswIndex));
-		++pswIndex;
-	}
-	//return psw.toString();
+	var chr = [];
 	
-	// init - stage 1
+	ptx_a = (src.substr(0, 2) == "0x") ? 2 : 0;
+	while (ptx_a < src.split("").length) {
+		ptx.push(parseInt(src.substr(ptx_a, 2), 16));
+		ptx_a += 2;
+	}
+	delete ptx_a;
+	
+	psw_a = 0;
+	while (psw_a < key.split("").length) {
+		psw.push(key.charCodeAt(psw_a));
+		++psw_a;
+	}
+	delete psw_a;
+	
 	init_a = 0;
 	init_b = 0;
 	while (init_b <= 255) {
-		mykey[init_b] = psw[init_b % psw.length];
-		sbox[init_b] = init_b;
+		mky[init_b] = psw[init_b % psw.length];
+		sbx[init_b] = init_b;
 		++init_b;
 	}
-	// init - stage 2
+	delete init_b;
+	
 	init_c = 0;
 	init_d = 0;
 	while (init_c <= 255) {
-		init_a = (init_a + sbox[init_c] + mykey[init_c]) % 256;
-		init_d = sbox[init_c];
-		sbox[init_c] = sbox[init_a];
-		sbox[init_a] = init_d;
+		init_a = (init_a + sbx[init_c] + mky[init_c]) % 256;
+		init_d = sbx[init_c];
+		sbx[init_c] = sbx[init_a];
+		sbx[init_a] = init_d;
 		++init_c;
 	}
-	// init - cleanup
 	delete init_a;
-	delete init_b;
 	delete init_c;
 	delete init_d;
-	//return psw.toString();
 	
-	// calculate
-	var chars = [];
-	var charsIndex = 0;
-	var chars_a = 0;
-	var chars_b = 0;
-	var chars_d;
-	var chars_e;
-	var chars_f;
-	var chars_g;
-	var chars_h;
-	while (charsIndex < plaintxt.length) {
-		chars_a = (chars_a + 1) % 256;
-		chars_b = (chars_b + sbox[chars_a]) % 256;
-		chars_e = sbox[chars_a];
-		sbox[chars_a] = sbox[chars_b];
-		sbox[chars_b] = chars_e;
-		chars_h = (sbox[chars_a] + sbox[chars_b]) % 256;
-		chars_d = sbox[chars_h];
-		chars_f = plaintxt[charsIndex] ^ chars_d;
-		chars.push(chars_f);
-		++charsIndex;
+	chr_a = 0;
+	chr_b = 0;
+	chr_d = 0;
+	chr_e = 0;
+	chr_f = 0;
+	chr_g = 0;
+	chr_h = 0;
+	while (chr_h < ptx.length) {
+		chr_a = (chr_a + 1) % 256;
+		chr_b = (chr_b + sbx[chr_a]) % 256;
+		chr_e = sbx[chr_a];
+		sbx[chr_a] = sbx[chr_b];
+		sbx[chr_b] = chr_e;
+		chr_d = sbx[(sbx[chr_a] + sbx[chr_b]) % 256];
+		chr_f = ptx[chr_h] ^ chr_d;
+		chr.push(chr_f);
+		++chr_h;
 	}
+	delete chr_a;
+	delete chr_b;
+	delete chr_d;
+	delete chr_e;
+	delete chr_f;
+	delete chr_g;
+	delete chr_h;
 	
-	// charsToStr
-	var str = "";
-	var strIndex = 0;
-	while (strIndex < chars.length) {
-		str += String.fromCharCode(chars[strIndex]);
-		++strIndex;
+	str_a = 0;
+	while (str_a < chr.length) {
+		str += String.fromCharCode(chr[str_a]);
+		++str_a;
 	}
+	delete str_a;
 	
 	return str;
 }
 
 //y.include();
-
 //response.query.response.playlist.trackList
 
 playlist = y.rest("http://pl.playlist.com/pl.php?playlist=" + playlist_id).get().response;
