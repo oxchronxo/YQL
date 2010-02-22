@@ -22,22 +22,16 @@ function decrypt(src) {
 	// hexToChars
 	var plaintxt = [];
 	var plaintxtIndex = (src.substr(0, 2) == "0x") ? 2 : 0;
-	return src.split("").length;
-	try {
-	while (plaintxtIndex < src.length) {
+	while (plaintxtIndex < src.split("").length) {
 		plaintxt.push(parseInt(src.substr(plaintxtIndex, 2), 16));
 		plaintxtIndex += 2;
 	}
-	} catch (e) {
-		return "failed";
-	}
-	return plaintxt.toString();
 	
 	// strToChars
 	var key = "sdf883jsdf22";
 	var psw = [];
 	var pswIndex = 0;
-	while (pswIndex < key.length) {
+	while (pswIndex < key.split("").length) {
 		psw.push(key.charCodeAt(pswIndex));
 		++pswIndex;
 	}
