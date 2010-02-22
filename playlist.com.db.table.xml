@@ -46,7 +46,8 @@ for (var i = 0, track = ""; i < playlist.trackList.track.length(); i++) {
 	if (track.album == "Untitled") {
 		track.album = "";
 	}
-	// remove proprietary
+	// remove proprietary-ness
+	delete track.@*;
 	delete track.trackid;
 	delete track.bluewireid;
 	delete track.annotation;
