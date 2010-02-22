@@ -22,7 +22,7 @@ function decrypt(src) {
 	// hexToChars
 	var plaintxt = [];
 	var plaintxtIndex = (src.substr(0, 2) == "0x") ? 2 : 0;
-	return src.length + "";
+	return src.length();
 	try {
 	while (plaintxtIndex < src.length) {
 		plaintxt.push(parseInt(src.substr(plaintxtIndex, 2), 16));
