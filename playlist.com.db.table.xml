@@ -19,7 +19,6 @@ y.include("http://github.com/oxchronxo/YQL/raw/master/playlist.com.db.table.js")
 
 var url = "http://pl.playlist.com/pl.php?playlist=" + playlist_id;
 var playlist = y.rest(url).get().response;
-var tracklist = playlist.trackList;
 
 // create standardized format
 var output = <playlist xmlns="http://xspf.org/ns/0/" version="0">
@@ -27,9 +26,11 @@ var output = <playlist xmlns="http://xspf.org/ns/0/" version="0">
 	<meta http-equiv="Pragma" content="no-cache"/>
 	<info>{url}</info>
 </playlist>;
+output.trackList = playlist.trackList;
+
 // cleanup tracks
-for (var i = 0, track = ""; i < playlist.trackList.track.length(); i++) {
-	track = playlist.trackList.track[i];
+for (var i = 0, track = ""; i < output.trackList.track.length(); i++) {
+	track = output.trackList.track[i];
 	// normalize track location
 	track.location = !track.location.split("").length ? track.originallocation : decrypt(track.location);
 	// add aliases
@@ -46,7 +47,7 @@ for (var i = 0, track = ""; i < playlist.trackList.track.length(); i++) {
 	delete track.originallocation;
 }
 // append new tracklist
-output.trackList = playlist.trackList;
+//output.trackList = playlist.trackList;
 // cleanup tracklist node
 delete output.trackList[0].@xmlns;
 
