@@ -40,6 +40,7 @@ for (var key in xml.@*) {
 }
 */
 delete xml.@*;
+xml.@xmlns = "http://xspf.org/ns/0/";
 xml.@version = 1;
 
 // cleanup tracks
