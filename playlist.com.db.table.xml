@@ -39,7 +39,7 @@ for (var key in xml.@*) {
 	}
 }
 */
-//delete xml.@*;
+delete xml.@*;
 xml.@version = 1;
 
 // cleanup tracks
