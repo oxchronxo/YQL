@@ -33,8 +33,8 @@ xspf.url = url;
 xspf.title = xml.title.text();
 */
 delete xml.@*;
-//xml.@xmlns = "http://xspf.org/ns/0/";
-//xml.@version = "1";
+xml.@xmlns = "http://xspf.org/ns/0/";
+xml.@version = "1";
 
 // cleanup tracks
 for (var i = 0, track = ""; i < xml.trackList.track.length(); i++) {
