@@ -23,11 +23,14 @@ var xml = y.rest(url).get().response;
 // standardize format
 //<meta http-equiv="Cache-Control" content="no-cache"/>
 //<meta http-equiv="Pragma" content="no-cache"/>
-var xspf = <playlist xmlns="http://xspf.org/ns/0/" version="1">
-	<id>{playlist}</id>
-	<url>{url}</url>
-	<title>{xml.title.text()}</title>
-</playlist>;
+
+var xspf = <playlist/>;
+xspf.@xmlns = "http://xspf.org/ns/0/";
+xspf.@version = "1";
+
+xspf.id = playlist;
+xspf.url = url;
+xspf.title = xml.title.text();
 
 // cleanup tracks
 for (var i = 0, track = ""; i < xml.trackList.track.length(); i++) {
