@@ -23,7 +23,7 @@ var xml = y.rest(url).get().response;
 // standardize format
 //<meta http-equiv="Cache-Control" content="no-cache"/>
 //<meta http-equiv="Pragma" content="no-cache"/>
-
+/*
 var xspf = <playlist/>;
 xspf.@xmlns = "http://xspf.org/ns/0/";
 xspf.@version = "1";
@@ -31,6 +31,10 @@ xspf.@version = "1";
 xspf.id = playlist;
 xspf.url = url;
 xspf.title = xml.title.text();
+*/
+delete xml.@*;
+xml.@xmlns = "http://xspf.org/ns/0/";
+xml.@version = "1";
 
 // cleanup tracks
 for (var i = 0, track = ""; i < xml.trackList.track.length(); i++) {
@@ -54,9 +58,10 @@ for (var i = 0, track = ""; i < xml.trackList.track.length(); i++) {
 }
 
 //append the tracklist
-xspf.trackList = xml.trackList;
+//xspf.trackList = xml.trackList;
 
-response.object = xspf;
+//response.object = xspf;
+response.object = xml;
 
 			]]></execute>
 		</select>
