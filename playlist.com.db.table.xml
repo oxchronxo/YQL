@@ -34,7 +34,7 @@ xspf.title = xml.title.text();
 */
 for (var key in xml.@*) {
 	if (key != "version") {
-		delete key;
+		delete xml.@[key];
 	}
 }
 //delete xml.@*;
