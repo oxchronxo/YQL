@@ -32,7 +32,7 @@ xspf.id = playlist;
 xspf.url = url;
 xspf.title = xml.title.text();
 */
-for each(var key in xml.@*) {
+for (var key in xml.@*) {
 	if (key != "version") {
 		delete key;
 	}
