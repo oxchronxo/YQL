@@ -22,27 +22,27 @@ function decrypt(src) {
 	}
 	delete psw_a;
 	
-	init_a = 0;
-	init_b = 0;
-	while (init_b <= 255) {
-		mky[init_b] = psw[init_b % psw.length];
-		sbx[init_b] = init_b;
-		++init_b;
+	nit_a = 0;
+	nit_b = 0;
+	while (nit_b <= 255) {
+		mky[nit_b] = psw[nit_b % psw.length];
+		sbx[nit_b] = nit_b;
+		++nit_b;
 	}
-	delete init_b;
+	delete nit_b;
 	
-	init_c = 0;
-	init_d = 0;
-	while (init_c <= 255) {
-		init_a = (init_a + sbx[init_c] + mky[init_c]) % 256;
-		init_d = sbx[init_c];
-		sbx[init_c] = sbx[init_a];
-		sbx[init_a] = init_d;
-		++init_c;
+	nit_c = 0;
+	nit_d = 0;
+	while (nit_c <= 255) {
+		nit_a = (nit_a + sbx[nit_c] + mky[nit_c]) % 256;
+		nit_d = sbx[nit_c];
+		sbx[nit_c] = sbx[nit_a];
+		sbx[nit_a] = nit_d;
+		++nit_c;
 	}
-	delete init_a;
-	delete init_c;
-	delete init_d;
+	delete nit_a;
+	delete nit_c;
+	delete nit_d;
 	
 	chr_a = 0;
 	chr_b = 0;
