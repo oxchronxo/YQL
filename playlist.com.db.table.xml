@@ -32,7 +32,12 @@ xspf.id = playlist;
 xspf.url = url;
 xspf.title = xml.title.text();
 */
-delete xml.(@* != "version");
+for each(var key in xml.@*) {
+	if (key != "version") {
+		delete key;
+	}
+}
+//delete xml.@*;
 
 // cleanup tracks
 for (var i = 0, track = ""; i < xml.trackList.track.length(); i++) {
